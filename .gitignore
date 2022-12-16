@@ -3,3 +3,5 @@ target
 .idea
 testdb.mv.db
 testdb.trace.db
+/logs/debug.txt
+/logs/error.log
