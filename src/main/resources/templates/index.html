@@ -1,5 +1,5 @@
 <!doctype html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -35,6 +35,26 @@
             </ul>
         </div>
     </nav>
+    <div class="card p-3">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Номер заявки</th>
+                <th scope="col">Название</th>
+                <th scope="col">Описание нарушения</th>
+                <th scope="col">Адрес</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="accident: ${accidents} ">
+                <td><span th:text="${accident.id}"></span>
+                <td><span th:text="${accident.name}"></span>
+                <td><span th:text="${accident.text}"></span>
+                <td><span th:text="${accident.address}"></span>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
 </body>
 </html>
