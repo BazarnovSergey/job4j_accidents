@@ -38,29 +38,14 @@
             </ul>
         </div>
     </nav>
+    <form th:action="@{/{id}/editAccident (id=${accident.getId()})}" th:method="GET">
     <div class="card p-3">
-        <table class="table">
-            <thead>
-            <tr>
-                <th scope="col">Номер заявки</th>
-                <th scope="col">Название</th>
-                <th scope="col">Описание нарушения</th>
-                <th scope="col">Адрес</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="accident: ${accidents} ">
-
-                <td><span th:text="${accident.id}"></span>
-                <td >
-                    <a th:href="@{/{id} (id=${accident.getId()})}" th:text="${accident.getName()}">accident</a>
-                </td>
-                <td><span th:text="${accident.text}"></span>
-                <td><span th:text="${accident.address}"></span>
-            </tr>
-            </tbody>
-        </table>
+      Название:  <p th:text="${accident.getName()}"></p>
+      Описание:  <p th:text="${accident.getText()}"></p>
+      Адресс:  <p th:text="${accident.getAddress()}"></p>
     </div>
+        <button type="submit" class="btn btn-primary mt-3">Редактировать</button>
+    </form>
 </div>
 </body>
 </html>

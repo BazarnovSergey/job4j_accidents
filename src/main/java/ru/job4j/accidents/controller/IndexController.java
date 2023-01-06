@@ -16,6 +16,6 @@ public class IndexController {
     public String index(Model model) {
         model.addAttribute("user", "Sergey");
         model.addAttribute("accidents", accidentService.getAccidents());
-        return "/index";
+        return "index";
     }
 }

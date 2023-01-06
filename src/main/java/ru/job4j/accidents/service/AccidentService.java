@@ -16,4 +16,21 @@ public class AccidentService {
     public List<Accident> getAccidents() {
         return accidentMem.getAccidents();
     }
+
+    public void createAccident(Accident accident) {
+        accidentMem.createAccident(accident);
+    }
+
+    public void updateAccident(int id, Accident accident) {
+        accidentMem.updateAccident(id, accident);
+    }
+
+    public Accident findById(int id) {
+        Accident accident = new Accident();
+        if (accidentMem.findById(id).isPresent()) {
+            accident = accidentMem.findById(id).get();
+
+        }
+        return accident;
+    }
 }
