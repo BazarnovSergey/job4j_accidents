@@ -50,11 +50,12 @@
             </thead>
             <tbody>
             <tr th:each="accident: ${accidents} ">
-
-                <td><span th:text="${accident.id}"></span>
-                <td >
-                    <a th:href="@{/{id} (id=${accident.getId()})}" th:text="${accident.getName()}">accident</a>
+                <td>
+                    <a th:href="@{|/formUpdateAccident?id=${accident.id}|}" th:text="${accident.getId()}">
+                        <i class="fa fa-edit"></i>
+                    </a>
                 </td>
+                <td><span th:text="${accident.name}"></span>
                 <td><span th:text="${accident.text}"></span>
                 <td><span th:text="${accident.address}"></span>
             </tr>

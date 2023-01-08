@@ -29,15 +29,16 @@ public class AccidentControl {
         return "redirect:/";
     }
 
-    @GetMapping("/{id}/editAccident")
-    public String viewEditAccident(Model model, @PathVariable("id") int id) {
-        model.addAttribute("accident", accidents.findById(id));
-        return "editAccident";
-    }
-
-    @PostMapping("{id}/updateAccident")
-    public String edit(@ModelAttribute("accident") Accident accident, @PathVariable("id") int id) {
-        accidents.updateAccident(id, accident);
+    @PostMapping("/updateAccident")
+    public String edit(@ModelAttribute("accident") Accident accident) {
+        accidents.updateAccident(accident.getId(), accident);
         return "redirect:/";
     }
+
+    @GetMapping("/formUpdateAccident")
+    public String update(@RequestParam("id") int id, Model model) {
+        model.addAttribute("accident", accidents.findById(id));
+        return "formUpdateAccident";
+    }
+
 }
