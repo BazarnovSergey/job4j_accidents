@@ -52,6 +52,14 @@
                             <input type="text" class="form-control" th:field="*{name}" name="name" id="name"/>
                             <label for="text">Описание инцидента</label>
                             <input type="text" class="form-control" th:field="*{text}" name="text" id="text"/>
+                            <div class="form-group">
+                                <label for="type.id">Тип</label>
+                                <select class="form-control" id="type.id" name="type.id">
+                                    <option th:each="type: ${types}"
+                                            th:text="${type.name}"
+                                            th:value="${type.id}"></option>
+                                </select>
+                            </div>
                             <label for="address">Адресс</label>
                             <input type="text" class="form-control" th:field="*{address}" name="address" id="address"/>
                         </div>

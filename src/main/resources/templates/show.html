@@ -38,12 +38,13 @@
             </ul>
         </div>
     </nav>
-    <form th:action="@{/{id}/editAccident (id=${accident.getId()})}" th:method="GET">
-    <div class="card p-3">
-      Название:  <p th:text="${accident.getName()}"></p>
-      Описание:  <p th:text="${accident.getText()}"></p>
-      Адресс:  <p th:text="${accident.getAddress()}"></p>
-    </div>
+    <form th:action="@{/{id}/formUpdateAccident (id=${accident.getId()})}" th:method="GET">
+        <div class="card p-3">
+            Название: <p th:text="*{accident.getName()}"></p>
+            Описание: <p th:text="${accident.getText()}"></p>
+            Тип: <p th:text="${accident.type.name}"></p>
+            Адресс: <p th:text="${accident.getAddress()}"></p>
+        </div>
         <button type="submit" class="btn btn-primary mt-3">Редактировать</button>
     </form>
 </div>

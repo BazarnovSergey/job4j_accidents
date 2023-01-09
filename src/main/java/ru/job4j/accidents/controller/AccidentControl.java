@@ -6,11 +6,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.job4j.accidents.model.Accident;
 import ru.job4j.accidents.service.AccidentService;
+import ru.job4j.accidents.service.AccidentTypeService;
 
 @Controller
 @AllArgsConstructor
 public class AccidentControl {
     private final AccidentService accidents;
+    private final AccidentTypeService types;
 
     @GetMapping("/{id}")
     public String show(@PathVariable("id") int id, Model model) {
@@ -19,25 +21,29 @@ public class AccidentControl {
     }
 
     @GetMapping("/createAccident")
-    public String viewCreateAccident() {
+    public String viewCreateAccident(Model model) {
+        model.addAttribute("types", types.getTypes());
         return "createAccident";
     }
 
     @PostMapping("/saveAccident")
     public String save(@ModelAttribute Accident accident) {
+       accident.setType(types.findById(accident.getType().getId()));
         accidents.createAccident(accident);
         return "redirect:/";
     }
 
     @PostMapping("/updateAccident")
     public String edit(@ModelAttribute("accident") Accident accident) {
+        accident.setType(types.findById(accident.getType().getId()));
         accidents.updateAccident(accident.getId(), accident);
         return "redirect:/";
     }
 
-    @GetMapping("/formUpdateAccident")
-    public String update(@RequestParam("id") int id, Model model) {
+    @GetMapping("/{id}/formUpdateAccident")
+    public String update(@PathVariable("id") int id, Model model) {
         model.addAttribute("accident", accidents.findById(id));
+        model.addAttribute("types", types.getTypes());
         return "formUpdateAccident";
     }
 
