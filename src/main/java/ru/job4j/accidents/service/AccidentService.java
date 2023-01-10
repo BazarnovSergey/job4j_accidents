@@ -3,25 +3,42 @@ package ru.job4j.accidents.service;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.job4j.accidents.model.Accident;
+import ru.job4j.accidents.model.AccidentType;
 import ru.job4j.accidents.repository.AccidentMem;
+import ru.job4j.accidents.repository.AccidentTypeMem;
 
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
 public class AccidentService {
 
     private final AccidentMem accidentMem;
+    private final AccidentTypeMem types;
 
     public List<Accident> getAccidents() {
         return accidentMem.getAccidents();
     }
 
     public void createAccident(Accident accident) {
+        Optional<AccidentType> typeOptional = types.findById(accident.getType().getId());
+        if (typeOptional.isEmpty()) {
+            throw new NoSuchElementException("Тип инцидента не найден");
+        } else {
+            accident.setType(typeOptional.get());
+        }
         accidentMem.createAccident(accident);
     }
 
     public void updateAccident(int id, Accident accident) {
+        Optional<AccidentType> typeOptional = types.findById(accident.getType().getId());
+        if (typeOptional.isEmpty()) {
+            throw new NoSuchElementException("Тип инцидента не найден");
+        } else {
+            accident.setType(typeOptional.get());
+        }
         accidentMem.updateAccident(id, accident);
     }
 

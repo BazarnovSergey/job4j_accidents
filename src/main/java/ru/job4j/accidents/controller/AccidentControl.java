@@ -28,14 +28,12 @@ public class AccidentControl {
 
     @PostMapping("/saveAccident")
     public String save(@ModelAttribute Accident accident) {
-       accident.setType(types.findById(accident.getType().getId()));
         accidents.createAccident(accident);
         return "redirect:/";
     }
 
     @PostMapping("/updateAccident")
     public String edit(@ModelAttribute("accident") Accident accident) {
-        accident.setType(types.findById(accident.getType().getId()));
         accidents.updateAccident(accident.getId(), accident);
         return "redirect:/";
     }

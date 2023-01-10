@@ -3,30 +3,32 @@ package ru.job4j.accidents.repository;
 import org.springframework.stereotype.Repository;
 import ru.job4j.accidents.model.AccidentType;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.concurrent.ConcurrentHashMap;
 
 @Repository
 public class AccidentTypeMem {
 
-    private final List<AccidentType> types = new ArrayList<>();
+    private final Map<Integer, AccidentType> types = new ConcurrentHashMap<>();
 
     {
-        types.add(new AccidentType(1, "Две машины"));
-        types.add(new AccidentType(2, "Машина и человек"));
-        types.add(new AccidentType(3, "Машина и велосипед"));
+        AccidentType accidentType1 = new AccidentType(1, "Две машины");
+        AccidentType accidentType2 = new AccidentType(2, "Машина и человек");
+        AccidentType accidentType3 = new AccidentType(3, "Машина и велосипед");
+        types.put(accidentType1.getId(), accidentType1);
+        types.put(accidentType2.getId(), accidentType2);
+        types.put(accidentType3.getId(), accidentType3);
     }
 
     public List<AccidentType> getTypes() {
-        return types;
+        return types.values().stream().toList();
     }
 
     public Optional<AccidentType> findById(int id) {
-        for (AccidentType type : types) {
-            if (type.getId() == id) {
-                return Optional.of(type);
-            }
+        if (types.containsKey(id)) {
+            return Optional.of(types.get(id));
         }
         return Optional.empty();
     }
