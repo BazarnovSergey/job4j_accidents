@@ -25,11 +25,7 @@ public class AccidentTypeMem {
     public List<AccidentType> getTypes() {
         return types.values().stream().toList();
     }
-
     public Optional<AccidentType> findById(int id) {
-        if (types.containsKey(id)) {
-            return Optional.of(types.get(id));
-        }
-        return Optional.empty();
+        return Optional.ofNullable(types.get(id));
     }
 }
