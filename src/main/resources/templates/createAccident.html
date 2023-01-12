@@ -53,6 +53,14 @@
                             <label for="name">Описание инцидента</label>
                             <input type="text" class="form-control" name="text" id="text">
                             <label for="name">Адресс</label>
+                            <div class="form-group">
+                                <label for="type.id" name="rIds">Статья</label>
+                                <select class="form-control" id="rIds" name="rIds" multiple>
+                                    <option th:each="rule: ${rules}"
+                                            th:text="${rule.name}"
+                                            th:value="${rule.id}"></option>
+                                </select>
+                            </div>
                             <input type="text" class="form-control" name="address" id="address">
                             <div class="form-group">
                                 <label for="type.id">Тип</label>

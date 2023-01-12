@@ -42,6 +42,10 @@
         <div class="card p-3">
             Название: <p th:text="*{accident.getName()}"></p>
             Описание: <p th:text="${accident.getText()}"></p>
+            Статья нарушения: <br>
+            <ul th:each="rule: ${accident.getRules()}">
+                <li th:text="${rule.getName()}"></li>
+            </ul>
             Тип: <p th:text="${accident.type.name}"></p>
             Адресс: <p th:text="${accident.getAddress()}"></p>
         </div>

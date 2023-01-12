@@ -6,21 +6,22 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 /**
- * Модель типа инцидента
+ * Модель описывающая статьи нарушений
  */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class AccidentType {
+public class Rule {
     /**
-     * Идентификатор типа инцидента
+     * Идентификатор статьи нарушения
      */
     @EqualsAndHashCode.Include
     private int id;
 
     /**
-     * Название типа инцидента
+     * Название статьи нарушения
      */
     private String name;
+
 }
