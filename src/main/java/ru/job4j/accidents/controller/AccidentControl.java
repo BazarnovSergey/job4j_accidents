@@ -5,15 +5,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.job4j.accidents.model.Accident;
-import ru.job4j.accidents.model.Rule;
 import ru.job4j.accidents.service.AccidentService;
 import ru.job4j.accidents.service.AccidentTypeService;
 import ru.job4j.accidents.service.RuleService;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
 
 @Controller
 @AllArgsConstructor
@@ -38,9 +34,7 @@ public class AccidentControl {
     @PostMapping("/saveAccident")
     public String save(@ModelAttribute Accident accident, HttpServletRequest req) {
         String[] ids = req.getParameterValues("rIds");
-        Set<Rule> rulesList = new HashSet<>();
-        Arrays.stream(ids).forEach(id -> rulesList.add(rules.findById(Integer.parseInt(id))));
-        accident.setRules(rulesList);
+        accidents.addTypesToAccident(ids, accident);
         accidents.createAccident(accident);
         return "redirect:/";
     }
@@ -48,9 +42,7 @@ public class AccidentControl {
     @PostMapping("/updateAccident")
     public String edit(@ModelAttribute("accident") Accident accident, HttpServletRequest req) {
         String[] ids = req.getParameterValues("rIds");
-        Set<Rule> rulesList = new HashSet<>();
-        Arrays.stream(ids).forEach(id -> rulesList.add(rules.findById(Integer.parseInt(id))));
-        accident.setRules(rulesList);
+        accidents.addTypesToAccident(ids, accident);
         accidents.updateAccident(accident.getId(), accident);
         return "redirect:/";
     }
