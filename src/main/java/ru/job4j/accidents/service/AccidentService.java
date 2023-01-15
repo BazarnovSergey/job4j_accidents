@@ -22,37 +22,53 @@ public class AccidentService {
         return accidentMem.getAccidents();
     }
 
-    public void createAccident(Accident accident) {
-        accident.setType(types.findById(accident.getType().getId()).orElseThrow(() ->
-                new NoSuchElementException("Тип инцидента не найден")));
+    /**
+     * Метод добавляет инцидент в базу
+     *
+     * @param accident - инцидент
+     * @param ruleIds  - массив содердащий id статей нарушений
+     */
+    public void createAccident(Accident accident, String[] ruleIds) {
+        addTypesAndRulesToAccident(accident, ruleIds);
         accidentMem.createAccident(accident);
     }
 
-    public void updateAccident(int id, Accident accident) {
-        accident.setType(types.findById(accident.getType().getId()).orElseThrow(() ->
-                new NoSuchElementException("Тип инцидента не найден")));
+    /**
+     * Метод заменяет существующий инцидент на новый
+     *
+     * @param id       - id инцидента
+     * @param accident - инцидент
+     * @param ruleIds  - массив содердащий id статей нарушений
+     */
+    public void updateAccident(int id, Accident accident, String[] ruleIds) {
+        addTypesAndRulesToAccident(accident, ruleIds);
         accidentMem.updateAccident(id, accident);
     }
 
+    /**
+     * Метод находит инцедент по id
+     *
+     * @param id - id инцидента
+     * @return возвращает найденный инцедент
+     */
     public Accident findById(int id) {
-        Accident accident = new Accident();
-        if (accidentMem.findById(id).isPresent()) {
-            accident = accidentMem.findById(id).get();
-        }
-        return accident;
+        return accidentMem.findById(id).orElseThrow(() ->
+                new NoSuchElementException("Инцидент с id: " + id + " не существует"));
     }
 
     /**
-     * Метод принимает из формы массив строк с id статей нарушений,
-     * находит их в базе и добавляет в инцидент
+     * Метод добавляет в объект Accident статьи и тип нарушений
      *
-     * @param ids      массив строк содержащий id статей нарушений
      * @param accident инцидент
+     * @param ruleIds  массив строк с id статей нарушений
      */
-    public void addTypesToAccident(String[] ids, Accident accident) {
+    private void addTypesAndRulesToAccident(Accident accident, String[] ruleIds) {
         Set<Rule> rulesList = new HashSet<>();
-        Arrays.stream(ids).forEach(id -> rulesList.add(rules.findById(Integer.parseInt(id)).orElseThrow(() ->
+        Arrays.stream(ruleIds).forEach(id -> rulesList.add(rules.findById(Integer.parseInt(id)).orElseThrow(() ->
                 new NoSuchElementException("Ошибка добавления статьи в инцидент"))));
         accident.setRules(rulesList);
+        accident.setType(types.findById(accident.getType().getId()).orElseThrow(() ->
+                new NoSuchElementException("Тип инцидента не найден")));
     }
+
 }
