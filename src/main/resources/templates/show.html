@@ -40,14 +40,20 @@
     </nav>
     <form th:action="@{/{id}/formUpdateAccident (id=${accident.getId()})}" th:method="GET">
         <div class="card p-3">
-            Название: <p th:text="*{accident.getName()}"></p>
+            <div>
+                <img th:width="300" th:high="300" th:src="@{|/posterAccident/${accident.id}|}">
+            </div>
+            Название: <p th:text="${accident.getName()}"></p>
             Описание: <p th:text="${accident.getText()}"></p>
+            Номер автомобиля: <p th:text="${accident.getCarNumber()}"></p>
+<!--            Тип нарушения: <p th:text="${accident.type.name}"></p>-->
             Статья нарушения: <br>
             <ul th:each="rule: ${accident.getRules()}">
                 <li th:text="${rule.getName()}"></li>
             </ul>
-            Тип: <p th:text="${accident.type.name}"></p>
-            Адресс: <p th:text="${accident.getAddress()}"></p>
+            Адрес: <p th:text="${accident.getAddress()}"></p>
+            Статус: <p th:text="${accident.getAccidentStatus().status}"></p>
+            Дата нарушения : <p th:text="${#temporals.format(accident.getDateAccident(), 'dd-MM-yyyy HH:mm')}"></p>
         </div>
         <button type="submit" class="btn btn-primary mt-3">Редактировать</button>
     </form>

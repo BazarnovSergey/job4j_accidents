@@ -1,48 +1,70 @@
 package ru.job4j.accidents.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
+import java.time.LocalDateTime;
 import java.util.Set;
 
 /**
- * Модель инцидента
+ * Модель нарушения
  */
 @Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Accident {
     /**
-     * Идентификатор инцидента
+     * Идентификатор нарушения
      */
     @EqualsAndHashCode.Include
     private int id;
 
     /**
-     * Название инцидента
+     * Название нарушения
      */
     private String name;
 
     /**
-     * Описание инцидента
+     * Описание нарушения
      */
     private String text;
 
     /**
-     * Адрес инцидента
+     * Номер автомобиля
      */
-    private String address;
+    private String carNumber;
 
     /**
-     * Тип инцидента
+     * Тип нарушения
      */
+    @ToString.Exclude
     private AccidentType type;
 
     /**
      * Статьи нарушений
      */
+    @ToString.Exclude
     private Set<Rule> rules;
+
+    /**
+     * Адрес нарушения
+     */
+    private String address;
+
+    /**
+     * Статус нарушения
+     */
+    @ToString.Exclude
+    private AccidentStatus accidentStatus;
+
+    /**
+     * Фото нарушения
+     */
+    private byte[] photo;
+
+    /**
+     * Дата и время нарушения
+     */
+    private LocalDateTime dateAccident = LocalDateTime.now();
 }

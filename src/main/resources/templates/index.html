@@ -42,6 +42,7 @@
         <table class="table">
             <thead>
             <tr>
+                <th scope="col">Фото</th>
                 <th scope="col">Номер заявки</th>
                 <th scope="col">Название</th>
                 <th scope="col">Описание нарушения</th>
@@ -51,6 +52,9 @@
             </thead>
             <tbody>
             <tr th:each="accident: ${accidents} ">
+                <td>
+                    <img th:width="150" th:high="150" th:src="@{|/posterAccident/${accident.id}|}">
+                </td>
                 <td>
                     <a th:href="@{/{id} (id=${accident.getId()})}" th:text="${accident.getId()}">
                         <i class="fa fa-edit"></i>

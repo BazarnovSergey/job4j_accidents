@@ -45,21 +45,20 @@
                     Редактирование
                 </div>
                 <div class="card-body">
-                    <form th:method="POST" th:action="@{/updateAccident}" th:object="${accident}">
+                    <form th:method="POST" th:action="@{/updateAccident}" th:object="${accident}"
+                          enctype="multipart/form-data">
                         <input type="hidden" name="id" th:field="*{id}"/>
                         <div class="form-group">
                             <label for="name">Название</label>
                             <input type="text" class="form-control" th:field="*{name}" name="name" id="name"/>
-                            <label for="text">Описание инцидента</label>
+
+                            <label for="text">Описание нарушения</label>
                             <input type="text" class="form-control" th:field="*{text}" name="text" id="text"/>
-                            <div class="form-group">
-                                <label for="type.id" name="rIds">Статья</label>
-                                <select class="form-control" id="rIds" name="rIds" multiple>
-                                    <option th:each="rule: ${rules}"
-                                            th:text="${rule.name}"
-                                            th:value="${rule.id}"></option>
-                                </select>
-                            </div>
+
+                            <label for="carNumber">Номер автомобиля</label>
+                            <input type="text" class="form-control" th:field="*{carNumber}" name="carNumber"
+                                   id="carNumber">
+
                             <div class="form-group">
                                 <label for="type.id">Тип</label>
                                 <select class="form-control" id="type.id" name="type.id">
@@ -68,8 +67,33 @@
                                             th:value="${type.id}"></option>
                                 </select>
                             </div>
+
+                            <div class="form-group">
+                                <label for="rIds" name="rIds">Статья</label>
+                                <select class="form-control" id="rIds" name="rIds" multiple>
+                                    <option th:each="rule: ${rules}"
+                                            th:text="${rule.name}"
+                                            th:value="${rule.id}"></option>
+                                </select>
+                            </div>
+
                             <label for="address">Адресс</label>
                             <input type="text" class="form-control" th:field="*{address}" name="address" id="address"/>
+
+                            <div class="form-group">
+                                <label for="accidentStatus.id">Статус нарушения</label>
+                                <select class="form-control" id="accidentStatus.id" name="accidentStatus.id">
+                                    <option th:each="status: ${statuses}"
+                                            th:text="${status.status}"
+                                            th:value="${status.id}"></option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="file">Фото</label>
+                                <input type="file" class="form-control" name="file" id="file">
+                            </div>
+
                         </div>
                         <button type="submit" class="btn btn-primary mt-3">Сохранить</button>
                     </form>
