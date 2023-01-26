@@ -14,7 +14,7 @@ public class SimpleAccidentStatusService implements AccidentStatusService {
 
     private final AccidentStatusRepository statuses;
 
-    public SimpleAccidentStatusService(@Qualifier("accidentStatusJdbcTemplate") AccidentStatusRepository statuses) {
+    public SimpleAccidentStatusService(@Qualifier("accidentStatusHibernate") AccidentStatusRepository statuses) {
         this.statuses = statuses;
     }
 

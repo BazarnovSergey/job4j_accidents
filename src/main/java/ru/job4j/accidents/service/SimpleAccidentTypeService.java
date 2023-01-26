@@ -13,7 +13,7 @@ public class SimpleAccidentTypeService implements AccidentTypeService {
     private final AccidentTypeRepository types;
 
     public SimpleAccidentTypeService(
-            @Qualifier("accidentTypeJdbcTemplate") AccidentTypeRepository types) {
+            @Qualifier("accidentTypeHibernate") AccidentTypeRepository types) {
         this.types = types;
     }
 

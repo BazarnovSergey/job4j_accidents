@@ -16,10 +16,10 @@ public class SimpleAccidentService implements AccidentService {
     private final AccidentStatusRepository statuses;
     private final RuleRepository rules;
 
-    public SimpleAccidentService(@Qualifier("accidentJdbcTemplate") AccidentRepository accidentRepository,
-                                 @Qualifier("accidentTypeJdbcTemplate") AccidentTypeRepository types,
-                                 @Qualifier("accidentStatusJdbcTemplate") AccidentStatusRepository statuses,
-                                 @Qualifier("ruleJdbcTemplate") RuleRepository rules) {
+    public SimpleAccidentService(@Qualifier("accidentHibernate") AccidentRepository accidentRepository,
+                                 @Qualifier("accidentTypeHibernate") AccidentTypeRepository types,
+                                 @Qualifier("accidentStatusHibernate") AccidentStatusRepository statuses,
+                                 @Qualifier("ruleHibernate") RuleRepository rules) {
         this.accidentRepository = accidentRepository;
         this.types = types;
         this.statuses = statuses;

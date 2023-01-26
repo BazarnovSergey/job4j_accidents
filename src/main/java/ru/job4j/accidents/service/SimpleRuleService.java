@@ -13,7 +13,7 @@ public class SimpleRuleService implements RuleService {
 
     private final RuleRepository rules;
 
-    public SimpleRuleService(@Qualifier("ruleJdbcTemplate") RuleRepository rules) {
+    public SimpleRuleService(@Qualifier("ruleHibernate") RuleRepository rules) {
         this.rules = rules;
     }
 
