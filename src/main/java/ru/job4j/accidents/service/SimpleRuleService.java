@@ -1,9 +1,8 @@
 package ru.job4j.accidents.service;
 
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import ru.job4j.accidents.model.Rule;
-import ru.job4j.accidents.repository.RuleRepository;
+import ru.job4j.accidents.repository.RuleDataRepository;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -11,14 +10,15 @@ import java.util.NoSuchElementException;
 @Service
 public class SimpleRuleService implements RuleService {
 
-    private final RuleRepository rules;
+    private final RuleDataRepository rules;
 
-    public SimpleRuleService(@Qualifier("ruleHibernate") RuleRepository rules) {
+    public SimpleRuleService(RuleDataRepository rules) {
         this.rules = rules;
     }
 
+    @Override
     public List<Rule> getRules() {
-        return rules.getRules();
+        return (List<Rule>) rules.findAll();
     }
 
     public Rule findById(int id) {

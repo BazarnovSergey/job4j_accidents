@@ -1,24 +1,22 @@
 package ru.job4j.accidents.service;
 
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import ru.job4j.accidents.model.AccidentType;
-import ru.job4j.accidents.repository.AccidentTypeRepository;
+import ru.job4j.accidents.repository.AccidentTypeDataRepository;
 
 import java.util.List;
 
 @Service
 public class SimpleAccidentTypeService implements AccidentTypeService {
 
-    private final AccidentTypeRepository types;
+    private final AccidentTypeDataRepository types;
 
-    public SimpleAccidentTypeService(
-            @Qualifier("accidentTypeHibernate") AccidentTypeRepository types) {
+    public SimpleAccidentTypeService(AccidentTypeDataRepository types) {
         this.types = types;
     }
 
     public List<AccidentType> getTypes() {
-        return types.getTypes();
+        return (List<AccidentType>) types.findAll();
     }
 
     public AccidentType findById(int id) {

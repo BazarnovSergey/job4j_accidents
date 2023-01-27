@@ -1,10 +1,9 @@
 package ru.job4j.accidents.service;
 
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import ru.job4j.accidents.model.AccidentStatus;
 
-import ru.job4j.accidents.repository.AccidentStatusRepository;
+import ru.job4j.accidents.repository.AccidentStatusDataRepository;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -12,14 +11,15 @@ import java.util.NoSuchElementException;
 @Service
 public class SimpleAccidentStatusService implements AccidentStatusService {
 
-    private final AccidentStatusRepository statuses;
+    private final AccidentStatusDataRepository statuses;
 
-    public SimpleAccidentStatusService(@Qualifier("accidentStatusHibernate") AccidentStatusRepository statuses) {
+    public SimpleAccidentStatusService(AccidentStatusDataRepository statuses) {
         this.statuses = statuses;
     }
 
+
     public List<AccidentStatus> getStatuses() {
-        return statuses.getStatuses();
+        return (List<AccidentStatus>) statuses.findAll();
     }
 
     public AccidentStatus findById(int id) {

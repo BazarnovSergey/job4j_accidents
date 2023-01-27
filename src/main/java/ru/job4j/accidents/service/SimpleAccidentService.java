@@ -1,6 +1,5 @@
 package ru.job4j.accidents.service;
 
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import ru.job4j.accidents.model.Accident;
 import ru.job4j.accidents.model.Rule;
@@ -11,23 +10,21 @@ import java.util.*;
 @Service
 public class SimpleAccidentService implements AccidentService {
 
-    private final AccidentRepository accidentRepository;
-    private final AccidentTypeRepository types;
-    private final AccidentStatusRepository statuses;
-    private final RuleRepository rules;
+    private final AccidentDataRepository accidentRepository;
+    private final AccidentTypeDataRepository types;
+    private final AccidentStatusDataRepository statuses;
+    private final RuleDataRepository rules;
 
-    public SimpleAccidentService(@Qualifier("accidentHibernate") AccidentRepository accidentRepository,
-                                 @Qualifier("accidentTypeHibernate") AccidentTypeRepository types,
-                                 @Qualifier("accidentStatusHibernate") AccidentStatusRepository statuses,
-                                 @Qualifier("ruleHibernate") RuleRepository rules) {
+    public SimpleAccidentService(AccidentDataRepository accidentRepository, AccidentTypeDataRepository types, AccidentStatusDataRepository statuses, RuleDataRepository rules) {
         this.accidentRepository = accidentRepository;
         this.types = types;
         this.statuses = statuses;
         this.rules = rules;
     }
 
+
     public List<Accident> getAccidents() {
-        return accidentRepository.getAccidents();
+        return (List<Accident>) accidentRepository.findAll();
     }
 
     /**
@@ -39,7 +36,7 @@ public class SimpleAccidentService implements AccidentService {
      */
     public void createAccident(Accident accident, String[] ruleIds, byte[] photo) {
         fillsFieldsAccident(accident, ruleIds, photo);
-        accidentRepository.createAccident(accident);
+        accidentRepository.save(accident);
     }
 
     /**
@@ -52,7 +49,7 @@ public class SimpleAccidentService implements AccidentService {
      */
     public void updateAccident(int id, Accident accident, String[] ruleIds, byte[] photo) {
         fillsFieldsAccident(accident, ruleIds, photo);
-        accidentRepository.updateAccident(id, accident);
+        accidentRepository.save(accident);
     }
 
     /**
