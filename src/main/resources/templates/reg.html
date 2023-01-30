@@ -20,11 +20,12 @@
 <div class="container py-3">
     <main class="form-signin">
         <h1 class="h3 mb-3 fw-normal">Регистрация</h1>
-        <form th:action="@{/reg}" method="post">
+        <form th:action="@{/reg}" th:method="POST" th:object="${user}">
             <div class="form-floating mb-3">
                 <input type="text" class="form-control" id="username" name="username">
                 <label for="username">User name</label>
             </div>
+            <div style="color: red" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
             <div class="form-floating">
                 <input type="password" class="form-control" id="password" name="password">
                 <label for="password">Password</label>

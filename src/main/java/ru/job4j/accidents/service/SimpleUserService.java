@@ -4,6 +4,8 @@ import org.springframework.stereotype.Service;
 import ru.job4j.accidents.model.User;
 import ru.job4j.accidents.repository.UserRepository;
 
+import java.util.Optional;
+
 @Service
 public class SimpleUserService implements UserService {
 
@@ -17,4 +19,10 @@ public class SimpleUserService implements UserService {
     public void save(User user) {
         userRepository.save(user);
     }
+
+    @Override
+    public Optional<User> getUser(String username) {
+        return userRepository.findByUsername(username).stream().findAny();
+    }
+
 }
