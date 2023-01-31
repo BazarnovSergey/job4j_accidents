@@ -19,13 +19,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class AccidentControlTest {
 
     @Autowired
-    @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     private MockMvc mockMvc;
 
     @Test
     @WithMockUser
     public void whenCreateAccidentThenReturnViewCreateAccident() throws Exception {
         this.mockMvc.perform(get("/createAccident"))
+                .andDo(print())
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(view().name("createAccident"));
