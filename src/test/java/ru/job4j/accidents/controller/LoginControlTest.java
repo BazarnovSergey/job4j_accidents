@@ -29,5 +29,4 @@ class LoginControlTest {
                 .andExpect(status().isOk())
                 .andExpect(view().name("login"));
     }
-
 }

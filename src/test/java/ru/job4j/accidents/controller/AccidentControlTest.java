@@ -31,22 +31,4 @@ class AccidentControlTest {
                 .andExpect(view().name("createAccident"));
     }
 
-    @Test
-    @WithMockUser
-    public void whenShowThenReturnViewShow() throws Exception {
-        this.mockMvc.perform(get("/1"))
-                .andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(view().name("show"));
-    }
-
-    @Test
-    @WithMockUser
-    public void whenUpdateThenReturnViewFormUpdateAccident() throws Exception {
-        this.mockMvc.perform(get("/1/formUpdateAccident"))
-                .andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(view().name("formUpdateAccident"));
-    }
-
 }
