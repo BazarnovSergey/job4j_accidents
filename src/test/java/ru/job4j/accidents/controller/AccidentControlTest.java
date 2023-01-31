@@ -19,6 +19,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class AccidentControlTest {
 
     @Autowired
+    @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     private MockMvc mockMvc;
 
     @Test
@@ -47,4 +48,5 @@ class AccidentControlTest {
                 .andExpect(status().isOk())
                 .andExpect(view().name("formUpdateAccident"));
     }
+
 }

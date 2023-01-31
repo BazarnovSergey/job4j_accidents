@@ -19,6 +19,7 @@ import ru.job4j.Main;
 class IndexControllerTest {
 
     @Autowired
+    @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     private MockMvc mockMvc;
 
     @Test
@@ -29,4 +30,5 @@ class IndexControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(view().name("index"));
     }
+
 }

@@ -18,6 +18,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class LoginControlTest {
 
     @Autowired
+    @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     private MockMvc mockMvc;
 
     @Test
@@ -28,4 +29,5 @@ class LoginControlTest {
                 .andExpect(status().isOk())
                 .andExpect(view().name("login"));
     }
+
 }
