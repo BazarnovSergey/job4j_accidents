@@ -28,5 +28,4 @@ class RegControlTest {
                 .andExpect(status().isOk())
                 .andExpect(view().name("reg"));
     }
-
 }

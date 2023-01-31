@@ -47,5 +47,4 @@ class AccidentControlTest {
                 .andExpect(status().isOk())
                 .andExpect(view().name("formUpdateAccident"));
     }
-
 }
