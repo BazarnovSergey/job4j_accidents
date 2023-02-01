@@ -27,7 +27,6 @@ class IndexControllerTest {
     @WithMockUser
     public void shouldReturnDefaultMessage() throws Exception {
         this.mockMvc.perform(get("/"))
-
                 .andExpect(status().isOk())
                 .andExpect(view().name("index"));
     }
