@@ -9,7 +9,6 @@ import ru.job4j.accidents.model.AccidentStatus;
 import java.util.List;
 import java.util.Optional;
 
-@Repository
 @AllArgsConstructor
 public class AccidentStatusJdbcTemplate implements AccidentStatusRepository {
 

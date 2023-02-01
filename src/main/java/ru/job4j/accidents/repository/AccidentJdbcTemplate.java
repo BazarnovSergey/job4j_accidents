@@ -16,7 +16,6 @@ import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.*;
 
-@Repository
 @AllArgsConstructor
 public class AccidentJdbcTemplate implements AccidentRepository {
 

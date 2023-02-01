@@ -8,7 +8,6 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
-@Repository
 public class AccidentTypeMem implements AccidentTypeRepository {
 
     private final Map<Integer, AccidentType> types = new ConcurrentHashMap<>();
