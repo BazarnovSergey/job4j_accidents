@@ -17,6 +17,8 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.Optional;
 
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
+
 @Controller
 @AllArgsConstructor
 public class AccidentControl {
@@ -39,7 +41,7 @@ public class AccidentControl {
         return "createAccident";
     }
 
-    @PostMapping("/saveAccident")
+    @PostMapping(path = "/saveAccident", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public String save(@ModelAttribute Accident accident,
                        @RequestParam("file") MultipartFile file,
                        HttpServletRequest req) throws IOException {
